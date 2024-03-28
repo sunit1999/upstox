@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Upstox"
 include(":app")
+include(":core:network")
+include(":core:data")
+include(":feature:portfolio")

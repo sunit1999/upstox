@@ -15,17 +15,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.sunit.upstox.feature.portfolio.R
+import com.sunit.upstox.feature.portfolio.ui.models.PortfolioUiSuccessState
 
 @Composable
 fun Summary(
-    modifier: Modifier = Modifier
+    portfolioUiState: PortfolioUiSuccessState,
+    modifier: Modifier = Modifier,
 ) {
-    var isExpanded by remember {
+    var isExpanded by rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -34,7 +38,7 @@ fun Summary(
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         ) {
             if (isExpanded)
                 Icon(
@@ -50,13 +54,34 @@ fun Summary(
                 )
         }
         if (isExpanded) {
-            SummaryField(key = "Current value:", value = "78900.00")
-            SummaryField(key = "Total investment:", value = "32474.68")
-            SummaryField(key = "Today’s Profit & Loss:", value = "-9637.15")
+            SummaryField(
+                key = stringResource(id = R.string.current_value),
+                value = stringResource(
+                    id = R.string.amount_decimal_format,
+                    portfolioUiState.totalCurrentValue
+                )
+            )
+            SummaryField(
+                key = stringResource(id = R.string.total_investment),
+                value = stringResource(
+                    id = R.string.amount_decimal_format,
+                    portfolioUiState.totalInvestment
+                )
+            )
+            SummaryField(
+                key = stringResource(id = R.string.todays_p_and_l),
+                value = stringResource(
+                    id = R.string.amount_decimal_format,
+                    portfolioUiState.todayPAndL
+                )
+            )
         }
         SummaryField(
-            key = "Profit & Loss:",
-            value = "46425.32",
+            key = stringResource(id = R.string.total_p_and_l),
+            value = stringResource(
+                id = R.string.amount_decimal_format,
+                portfolioUiState.totalPAndL
+            ),
             modifier = Modifier.padding(top = if (isExpanded) 16.dp else 0.dp)
         )
     }
@@ -75,6 +100,6 @@ fun SummaryField(
             .padding(vertical = 8.dp)
     ) {
         Text(text = key, fontWeight = FontWeight.Bold)
-        Text(text = "$ $value")
+        Text(text = value)
     }
 }

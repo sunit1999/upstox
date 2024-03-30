@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="p_and_l">P/L:</string>
+	<string name="ltp">LTP:</string>
+
+	<string name="current_value">Current value:</string>
+	<string name="total_investment">Total investment:</string>
+	<string name="todays_p_and_l">Today’s Profit &amp; Loss:</string>
+	<string name="total_p_and_l">Profit &amp; Loss:</string>
+
+	<string name="amount_decimal_format">₹ %1$.2f</string>
+</resources>

@@ -1,4 +1,4 @@
-package com.sunit.upstox.core.network.models
+package com.sunit.upstox.core.model
 
 import kotlinx.serialization.Serializable
 

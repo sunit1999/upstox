@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.hilt)
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.sunit.upstox.core.data"
+    namespace = "com.sunit.upstox.core.model"
     compileSdk = 34
 
     defaultConfig {
@@ -35,14 +34,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    testImplementation(libs.junit)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(libs.kotlinx.serialization.json)
 }

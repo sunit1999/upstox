@@ -1,8 +1,8 @@
 package com.sunit.upstox.core.data.repository
 
 import com.sunit.upstox.core.data.util.suspendRunCatching
+import com.sunit.upstox.core.model.Portfolio
 import com.sunit.upstox.core.network.NetworkDataSource
-import com.sunit.upstox.core.network.models.Portfolio
 import javax.inject.Inject
 
 class PortfolioRepositoryImpl @Inject constructor(

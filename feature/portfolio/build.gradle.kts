@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview)
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,7 +1,7 @@
 package com.sunit.upstox.core.network.di
 
 import com.sunit.upstox.core.network.BuildConfig
-import com.sunit.upstox.core.network.retrofit.Api
+import com.sunit.upstox.core.network.retrofit.UpstoxApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
 
-const val BASE_URL = "https://run.mocky.io/v3/bde7230e-bc91-43bc-901d-c79d008bddc8"
+const val BASE_URL = "https://56c70a06e06e498fbf06437e72fa7258.api.mockbin.io/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,18 +40,34 @@ object NetworkModule {
             .build()
     }
 
+
     @Provides
     @Singleton
-    fun provideRetrofitApi(
+    fun provideJsonSerializer(): Json = Json {
+        ignoreUnknownKeys = true
+        prettyPrint = true
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        json: Json,
         client: OkHttpClient
-    ): Api {
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(client)
             .addConverterFactory(
-                Json.asConverterFactory("application/json".toMediaType())
+                json.asConverterFactory("application/json".toMediaType())
             )
+            .client(client)
             .build()
-            .create(Api::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpstoxApi(
+        retrofit: Retrofit
+    ): UpstoxApi {
+        return retrofit.create(UpstoxApi::class.java)
     }
 }

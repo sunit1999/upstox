@@ -15,7 +15,6 @@ fun UpstoxNavHost(
     NavHost(
         navController = navController,
         startDestination = TopLevelDestination.PORTFOLIIO.route,
-        modifier = modifier
     ) {
         composable(route = TopLevelDestination.PORTFOLIIO.route) {
             PortfolioScreen()

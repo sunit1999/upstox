@@ -9,10 +9,10 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModule {
+interface DataModule {
 
     @Binds
-    abstract fun bindPortfolioRepository(
+    fun bindPortfolioRepository(
         repository: PortfolioRepositoryImpl
     ): PortfolioRepository
 }

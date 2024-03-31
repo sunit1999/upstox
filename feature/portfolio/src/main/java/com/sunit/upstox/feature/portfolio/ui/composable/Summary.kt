@@ -40,19 +40,13 @@ fun Summary(
             horizontalArrangement = Arrangement.Center,
             modifier = modifier.fillMaxWidth()
         ) {
-            if (isExpanded)
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    modifier = Modifier.clickable { isExpanded = !isExpanded }
-                )
-            else
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = null,
-                    modifier = Modifier.clickable { isExpanded = !isExpanded }
-                )
+            Icon(
+                imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                contentDescription = null,
+                modifier = Modifier.clickable { isExpanded = !isExpanded }
+            )
         }
+
         if (isExpanded) {
             SummaryField(
                 key = stringResource(id = R.string.current_value),

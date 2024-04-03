@@ -4,7 +4,6 @@ import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.cancellation.CancellationException
 
 internal suspend fun <T> suspendRunCatching(
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
@@ -12,8 +11,6 @@ internal suspend fun <T> suspendRunCatching(
 ): Result<T> = withContext(dispatcher) {
     try {
         Result.success(block())
-    } catch (cancellationException: CancellationException) {
-        throw cancellationException
     } catch (exception: Exception) {
         Log.i(
             "suspendRunCatching",
